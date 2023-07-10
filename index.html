@@ -4,16 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Products</title>
-    <title>Document</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="./app.js" defer></script>
-    <script src="./search-filter.js" defer></script>
+    <script type="module" src="./app.js" defer></script>
   </head>
   <body>
+    <header >
     <nav>
-      <img class="logo" src='fashion-logo-design.png' />
-      <input class='search' placeholder="Search Products...">
+      <img class="logo" src="fashion-logo-design.png" />
+      <input class="search" placeholder="Search Products..." />
     </nav>
+    <ul class="scroll-hide">
+      <li><button class="all-filter category-button">All</button></li>
+      <li><button class="men-filter category-button">Men's Clothing</button></li>
+      <li><button class="women-filter category-button">Women's Clothing</button></li>
+      <li><button class="jewelery-filter category-button">Jewelery</button></li>
+      <li><button class="electronics-filter category-button">Electronics</button></li>
+    </ul>
+  </header>
     <div id="box"></div>
   </body>
 </html>

@@ -1,27 +1,15 @@
+import "./search-filter.js";
+import './men-filter.js';
+import './women-filter.js';
+import './jewelery-filter.js';
+import './electronics-filter.js';
+import './scroll-hide.js';
+
 const box = document.getElementById("box");
+const allFilter = document.querySelector('.all-filter');
 
-// const fetchApi = async () => {
-//   const response = await fetch("https://fakestoreapi.com/products");
-//   const data = await response.json();
-//   console.log(data);
-//   const renderCard = () => {
-//     const displayCard = data.map(({ title, image, price }) => {
-//         return `
-//         <div class='card'><div class='title'>${title}</div>
-//                <img src=${image} class='img-product'>
-//                <div class='price'>Price: $${price}</div>
-//                </div>`;
-//       })
-//       .join("");
-//     box.innerHTML = displayCard;
-//   };
 
-//   renderCard();
-// };
-
-// fetchApi();
-
-const renderCard = ({ title, image, price }) => {
+export const renderCard = ({ title, image, price }) => {
   const productCard = `
   <div class='card'>
    <div class='text'>
@@ -50,3 +38,6 @@ const fetchApi = async () => {
 };
 
 fetchApi();
+
+allFilter.addEventListener('click', fetchApi)
+

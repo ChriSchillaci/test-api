@@ -1,6 +1,6 @@
-const searchBar = document.querySelector(".search");
+ const searchBar = document.querySelector(".search");
 
-const filterMethod = () => {
+ const filterMethod = () => {
   const filter = searchBar.value.toLowerCase();
   const titles = document.querySelectorAll(".title");
   
