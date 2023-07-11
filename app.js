@@ -1,15 +1,16 @@
-import "./search-filter.js";
-import './men-filter.js';
-import './women-filter.js';
-import './jewelery-filter.js';
-import './electronics-filter.js';
+import './search-filter.js';
 import './scroll-hide.js';
 
 const box = document.getElementById("box");
 const allFilter = document.querySelector('.all-filter');
+const menFilter = document.querySelector('.men-filter');
+const womenFilter = document.querySelector('.women-filter');
+const jeweleryFilter = document.querySelector('.jewelery-filter');
+const electronicsFilter = document.querySelector('.electronics-filter');
 
+let changeUrl = '';
 
-export const renderCard = ({ title, image, price }) => {
+const renderCard = ({ title, image, price }) => {
   const productCard = `
   <div class='card'>
    <div class='text'>
@@ -21,8 +22,8 @@ export const renderCard = ({ title, image, price }) => {
   return productCard;
 };
 
-const fetchApi = async () => {
-  const response = await fetch("https://fakestoreapi.com/products");
+const fetchApi = async (categoryUrl) => {
+  const response = await fetch(`https://fakestoreapi.com/products${categoryUrl}`);
   const data = await response.json();
   console.log(data);
 
@@ -37,7 +38,29 @@ const fetchApi = async () => {
   box.innerHTML = productList.join("");
 };
 
-fetchApi();
+fetchApi(changeUrl);
 
-allFilter.addEventListener('click', fetchApi)
+allFilter.addEventListener('click', () => {
+  changeUrl = "";
+  fetchApi(changeUrl);
+});
 
+menFilter.addEventListener('click', () => {
+changeUrl = "/category/men's clothing";
+fetchApi(changeUrl);
+});
+
+womenFilter.addEventListener('click', () => {
+changeUrl = "/category/women's clothing";
+fetchApi(changeUrl);
+});
+
+jeweleryFilter.addEventListener('click', () => {
+changeUrl = "/category/jewelery";
+fetchApi(changeUrl);
+});
+
+electronicsFilter.addEventListener('click', () => {
+changeUrl = "/category/electronics";
+fetchApi(changeUrl);
+});
