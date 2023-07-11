@@ -124,26 +124,24 @@ ul {
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  width: 420px;
-  height: 300px;
+  width: 380px;
+  height: 250px;
   background-color: white;
   margin: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .text {
-  padding: 0 15px;
+  padding: 0 30px;
 }
 
 .title {
-  font-size: 16px;
-  margin-top: 10px;
+  font-size: 14px;
 }
 
 .img-product {
   width: 50%;
-  height: 60%;
-  margin-top: 10px;
+  height: 50%;
   margin-right: 15px;
 }
 
@@ -173,5 +171,5 @@ ul {
 
 .price {
   margin-top: 25px;
-  font-size: 16px;
+  /* font-size: 16px; */
 }

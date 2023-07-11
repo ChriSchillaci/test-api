@@ -14,8 +14,8 @@ const renderCard = ({ title, image, price }) => {
   const productCard = `
   <div class='card'>
    <div class='text'>
-    <div class='title'>${title}</div>
-     <div class='price'>Price:$${price}</div>
+    <div class='title'><b>${title}</b></div>
+     <div class='price'><b>Price:</b> $${price}</div>
      <button class='buy'>Buy</button></div>
                 <img src=${image} class='img-product'>
                   </div>`;
