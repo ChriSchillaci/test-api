@@ -1,4 +1,4 @@
-const ul = document.querySelector('.scroll-hide');
+import { ul } from "./app.js";
 
 let prevScrollpos = window.scrollY;
 window.onscroll = () => {

@@ -1,14 +1,10 @@
-import './search-filter.js';
-import './scroll-hide.js';
+import "./search-filter.js";
+import "./scroll-hide.js";
 
 const box = document.getElementById("box");
-const allFilter = document.querySelector('.all-filter');
-const menFilter = document.querySelector('.men-filter');
-const womenFilter = document.querySelector('.women-filter');
-const jeweleryFilter = document.querySelector('.jewelery-filter');
-const electronicsFilter = document.querySelector('.electronics-filter');
+export const ul = document.querySelector('.scroll-hide');
 
-let changeUrl = '';
+let changeUrl = "https://fakestoreapi.com/products";
 
 const renderCard = ({ title, image, price }) => {
   const productCard = `
@@ -23,7 +19,7 @@ const renderCard = ({ title, image, price }) => {
 };
 
 const fetchApi = async (categoryUrl) => {
-  const response = await fetch(`https://fakestoreapi.com/products${categoryUrl}`);
+  const response = await fetch(categoryUrl);
   const data = await response.json();
   console.log(data);
 
@@ -40,27 +36,22 @@ const fetchApi = async (categoryUrl) => {
 
 fetchApi(changeUrl);
 
-allFilter.addEventListener('click', () => {
-  changeUrl = "";
-  fetchApi(changeUrl);
-});
-
-menFilter.addEventListener('click', () => {
-changeUrl = "/category/men's clothing";
-fetchApi(changeUrl);
-});
-
-womenFilter.addEventListener('click', () => {
-changeUrl = "/category/women's clothing";
-fetchApi(changeUrl);
-});
-
-jeweleryFilter.addEventListener('click', () => {
-changeUrl = "/category/jewelery";
-fetchApi(changeUrl);
-});
-
-electronicsFilter.addEventListener('click', () => {
-changeUrl = "/category/electronics";
-fetchApi(changeUrl);
+ul.addEventListener("click", event => {
+  if (event.target.id === "men") {
+    changeUrl = "https://fakestoreapi.com/products/category/men's clothing";
+    fetchApi(changeUrl);
+  } else if (event.target.id === "women") {
+    changeUrl = "https://fakestoreapi.com/products/category/women's clothing";
+    fetchApi(changeUrl);
+  } else if (event.target.id === "jewelery") {
+    changeUrl = "https://fakestoreapi.com/products/category/jewelery";
+    fetchApi(changeUrl);
+  } else if (event.target.id === "electronics") {
+    changeUrl = "https://fakestoreapi.com/products/category/electronics";
+    fetchApi(changeUrl);
+  } else {
+    changeUrl = "https://fakestoreapi.com/products";
+    fetchApi(changeUrl);
+  }
+  console.log(event)
 });
