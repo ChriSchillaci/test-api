@@ -36,22 +36,11 @@ const fetchApi = async (categoryUrl) => {
 
 fetchApi(changeUrl);
 
-ul.addEventListener("click", event => {
-  if (event.target.id === "men") {
-    changeUrl = "https://fakestoreapi.com/products/category/men's clothing";
-    fetchApi(changeUrl);
-  } else if (event.target.id === "women") {
-    changeUrl = "https://fakestoreapi.com/products/category/women's clothing";
-    fetchApi(changeUrl);
-  } else if (event.target.id === "jewelery") {
-    changeUrl = "https://fakestoreapi.com/products/category/jewelery";
-    fetchApi(changeUrl);
-  } else if (event.target.id === "electronics") {
-    changeUrl = "https://fakestoreapi.com/products/category/electronics";
-    fetchApi(changeUrl);
-  } else {
-    changeUrl = "https://fakestoreapi.com/products";
-    fetchApi(changeUrl);
-  }
-  console.log(event)
-});
+ul.addEventListener('click' , event => {
+  event.target.id === 'men' ? changeUrl = "https://fakestoreapi.com/products/category/men's clothing" :
+  event.target.id === 'women' ? changeUrl = "https://fakestoreapi.com/products/category/women's clothing" :
+  event.target.id === 'jewelery' ? changeUrl = "https://fakestoreapi.com/products/category/jewelery" :
+  event.target.id === 'electronics' ? changeUrl = "https://fakestoreapi.com/products/category/electronics" :
+  changeUrl = "https://fakestoreapi.com/products";
+  fetchApi(changeUrl);
+})
