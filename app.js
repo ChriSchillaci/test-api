@@ -4,8 +4,6 @@ import "./scroll-hide.js";
 const box = document.getElementById("box");
 export const ul = document.querySelector('.scroll-hide');
 
-let changeUrl = "https://fakestoreapi.com/products";
-
 const renderCard = ({ title, image, price }) => {
   const productCard = `
   <div class='card'>
@@ -18,8 +16,9 @@ const renderCard = ({ title, image, price }) => {
   return productCard;
 };
 
-const fetchApi = async (categoryUrl) => {
-  const response = await fetch(categoryUrl);
+const fetchApi = async (category = "", id = "" ) => {
+  const baseUrl = "https://fakestoreapi.com/products";
+  const response = await fetch(baseUrl + category + id);
   const data = await response.json();
   console.log(data);
 
@@ -34,13 +33,17 @@ const fetchApi = async (categoryUrl) => {
   box.innerHTML = productList.join("");
 };
 
-fetchApi(changeUrl);
+fetchApi();
+
+// ul.addEventListener('click' , event => {
+//   event.target.id === 'men' ? changeUrl = "https://fakestoreapi.com/products/category/men's clothing" :
+//   event.target.id === 'women' ? changeUrl = "https://fakestoreapi.com/products/category/women's clothing" :
+//   event.target.id === 'jewelery' ? changeUrl = "https://fakestoreapi.com/products/category/jewelery" :
+//   event.target.id === 'electronics' ? changeUrl = "https://fakestoreapi.com/products/category/electronics" :
+//   changeUrl = "https://fakestoreapi.com/products";
+//   fetchApi(changeUrl);
+// })
 
 ul.addEventListener('click' , event => {
-  event.target.id === 'men' ? changeUrl = "https://fakestoreapi.com/products/category/men's clothing" :
-  event.target.id === 'women' ? changeUrl = "https://fakestoreapi.com/products/category/women's clothing" :
-  event.target.id === 'jewelery' ? changeUrl = "https://fakestoreapi.com/products/category/jewelery" :
-  event.target.id === 'electronics' ? changeUrl = "https://fakestoreapi.com/products/category/electronics" :
-  changeUrl = "https://fakestoreapi.com/products";
-  fetchApi(changeUrl);
-})
+  event.target.id ? fetchApi('/category/', event.target.id) : fetchApi('', '')
+});
