@@ -16,13 +16,28 @@ const renderCard = ({ title, image, price }) => {
   return productCard;
 };
 
-const fetchApi = async (category = "", id = "" ) => {
-  const baseUrl = "https://fakestoreapi.com/products";
-  const response = await fetch(baseUrl + category + id);
+// ho rinominato il parametro "category"
+// cerca di creare sempre funzioni che parlano,
+// l'endpoint potrebbe anche essere diverso da /category/
+// quindi è bene dargli un nome generico;
+const fetchApi = async ( toEndpoint = "", id = "" ) => {
+  // il baseURL deve sempre essere senza endpoint
+  // se ti manca il concetto di "endpoint" chiedimelo e te lo spiego
+  const baseUrl = "https://fakestoreapi.com/";
+  const response = await fetch(baseUrl + toEndpoint + id);
   const data = await response.json();
+
   console.log(data);
 
   const productList = data.map((item) => {
+    // qui potevi scrivere il codice meglio: 
+    // piccolo trucco:
+    // 
+    // const {title, image, price} = item
+    // return renderCard({title, image, price})
+    // 
+    // che ne pensi?
+
     return renderCard({
       title: item.title,
       image: item.image,
@@ -33,17 +48,11 @@ const fetchApi = async (category = "", id = "" ) => {
   box.innerHTML = productList.join("");
 };
 
-fetchApi();
-
-// ul.addEventListener('click' , event => {
-//   event.target.id === 'men' ? changeUrl = "https://fakestoreapi.com/products/category/men's clothing" :
-//   event.target.id === 'women' ? changeUrl = "https://fakestoreapi.com/products/category/women's clothing" :
-//   event.target.id === 'jewelery' ? changeUrl = "https://fakestoreapi.com/products/category/jewelery" :
-//   event.target.id === 'electronics' ? changeUrl = "https://fakestoreapi.com/products/category/electronics" :
-//   changeUrl = "https://fakestoreapi.com/products";
-//   fetchApi(changeUrl);
-// })
+fetchApi('products');
 
 ul.addEventListener('click' , event => {
-  event.target.id ? fetchApi('/category/', event.target.id) : fetchApi('', '')
+  // Puoi usare fetchApi() quando non devi passare argomenti li hai già dati di default
+  // alla definizione della funzione;
+  // in questo caso di default passiamo "products" il baseURL è meglio tenerlo pulito
+  event.target.id ? fetchApi('products/category/', event.target.id) : fetchApi('products')
 });
