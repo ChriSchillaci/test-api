@@ -1,7 +1,7 @@
 import "./search-filter.js";
 import "./scroll-hide.js";
 
-const box = document.getElementById("box");
+export const box = document.getElementById("box");
 export const ul = document.querySelector('.scroll-hide');
 
 const renderCard = ({ title, image, price }) => {
