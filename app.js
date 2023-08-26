@@ -1,8 +1,8 @@
-import "./search-filter.js";
 import "./scroll-hide.js";
 
-export const box = document.getElementById("box");
-export const ul = document.querySelector('.scroll-hide');
+const searchBar = document.querySelector(".search");
+const box = document.getElementById("box");
+export const ul = document.querySelector(".scroll-hide");
 
 const renderCard = ({ title, image, price }) => {
   const productCard = `
@@ -20,39 +20,36 @@ const renderCard = ({ title, image, price }) => {
 // cerca di creare sempre funzioni che parlano,
 // l'endpoint potrebbe anche essere diverso da /category/
 // quindi è bene dargli un nome generico;
-const fetchApi = async ( toEndpoint = "", id = "" ) => {
+const fetchApi = async (toEndpoint = "", id = "") => {
   // il baseURL deve sempre essere senza endpoint
   // se ti manca il concetto di "endpoint" chiedimelo e te lo spiego
   const baseUrl = "https://fakestoreapi.com/";
   const response = await fetch(baseUrl + toEndpoint + id);
   const data = await response.json();
 
-  console.log(data);
+  const filterData = (event) => {
+    const filter = data
+      .filter((el) => {
+        return el.title.toLowerCase().includes(event.target.value);
+      })
+      .map((item) => {
+        const { title, image, price } = item;
+        return renderCard({ title, image, price });
+      });
+    box.innerHTML = filter.join("");
 
-  const productList = data.map((item) => {
-    // qui potevi scrivere il codice meglio: 
-    // piccolo trucco:
-    // 
-    // const {title, image, price} = item
-    // return renderCard({title, image, price})
-    // 
-    // che ne pensi?
-
-    return renderCard({
-      title: item.title,
-      image: item.image,
-      price: item.price,
-    });
-  });
-
-  box.innerHTML = productList.join("");
+    !box.childNodes.length ? box.innerHTML = "Nothing found" : null;
+  };
+  searchBar.addEventListener("input", filterData);
 };
 
-fetchApi('products');
+fetchApi("products");
 
-ul.addEventListener('click' , event => {
+ul.addEventListener("click", (event) => {
   // Puoi usare fetchApi() quando non devi passare argomenti li hai già dati di default
   // alla definizione della funzione;
   // in questo caso di default passiamo "products" il baseURL è meglio tenerlo pulito
-  event.target.id ? fetchApi('products/category/', event.target.id) : fetchApi('products')
+  event.target.id
+    ? fetchApi("products/category/", event.target.id)
+    : fetchApi("products");
 });
