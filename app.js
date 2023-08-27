@@ -1,7 +1,7 @@
 import "./scroll-hide.js";
 
 const searchBar = document.querySelector(".search");
-const box = document.getElementById("box");
+const box = document.querySelector(".box");
 export const ul = document.querySelector(".scroll-hide");
 
 const renderCard = ({ title, image, price }) => {
@@ -38,9 +38,21 @@ const fetchApi = async (toEndpoint = "", id = "") => {
       });
     box.innerHTML = filter.join("");
 
-    !box.childNodes.length ? box.innerHTML = "Nothing found" : null;
+    if (!box.childNodes.length) {
+      box.innerHTML = "Couldn't find any product";
+      box.classList.add("active");
+    } else {
+      box.classList.remove("active");
+    }
   };
   searchBar.addEventListener("input", filterData);
+
+  box.innerHTML = data
+    .map((item) => {
+      const { title, image, price } = item;
+      return renderCard({ title, image, price });
+    })
+    .join("");
 };
 
 fetchApi("products");
